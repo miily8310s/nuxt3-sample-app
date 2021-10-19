@@ -3,11 +3,7 @@ interface ResData {
   id: number;
   title: string;
 }
-const { data: hello } = await useAsyncData(
-  "hello",
-  () => $fetch("/api/hello"),
-  { pick: ["hoge"] }
-);
+const { data } = await useAsyncData("hello", () => $fetch("/api/hello"));
 const { data: todo } = await useFetch<string, ResData>("/todos/1", {
   pick: ["id", "title"],
   baseURL: "https://jsonplaceholder.typicode.com",
@@ -15,6 +11,7 @@ const { data: todo } = await useFetch<string, ResData>("/todos/1", {
 </script>
 
 <template>
-  <p>{{ hello.hoge }}</p>
+  {{ data.counter }}
+  <p>{{ data.hello }}</p>
   <p>{{ todo.id }} {{ todo.title }}</p>
 </template>
